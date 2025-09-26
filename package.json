@@ -1,0 +1,44 @@
+{
+  "name": "developpement-web-gl",
+  "version": "1.0.0",
+  "description": "TPs et comptes rendus du module Développement Web FullStack",
+  "private": true,
+  "workspaces": [
+    "01-JavaScript-avance/*",
+    "02-TypeScript/*",
+    "03-Angular/*",
+    "04-NextJS/*",
+    "05-Projet-fil-rouge/*"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm run install:js && npm run install:ts && npm run install:angular && npm run install:nextjs",
+    "install:js": "cd 01-JavaScript-avance && npm install",
+    "install:ts": "cd 02-TypeScript && npm install",
+    "install:angular": "cd 03-Angular && npm install",
+    "install:nextjs": "cd 04-NextJS && npm install",
+    "test": "npm run test:js && npm run test:ts && npm run test:angular && npm run test:nextjs",
+    "test:js": "cd 01-JavaScript-avance && npm test",
+    "test:ts": "cd 02-TypeScript && npm test",
+    "test:angular": "cd 03-Angular && npm test",
+    "test:nextjs": "cd 04-NextJS && npm test",
+    "lint": "npm run lint:js && npm run lint:ts && npm run lint:angular && npm run lint:nextjs",
+    "lint:js": "cd 01-JavaScript-avance && npm run lint",
+    "lint:ts": "cd 02-TypeScript && npm run lint",
+    "lint:angular": "cd 03-Angular && npm run lint",
+    "lint:nextjs": "cd 04-NextJS && npm run lint"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "angular",
+    "nextjs",
+    "web-development",
+    "fullstack"
+  ],
+  "author": "Rayen Mestiri",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3"
+  }
+}
