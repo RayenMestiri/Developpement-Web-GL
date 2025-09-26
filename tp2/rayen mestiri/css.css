@@ -1,0 +1,334 @@
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 30px;
+    min-height: 100vh;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+/* Mode sombre */
+body.dark-theme {
+    background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+}
+
+body.dark-theme .container {
+    background-color: #2d3748;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme h1,
+body.dark-theme h5,
+body.dark-theme .task-text:not(.text-muted) {
+    color: #e2e8f0;
+}
+
+body.dark-theme .card {
+    background-color: #2d3748;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .card-header,
+body.dark-theme .list-group-item {
+    background-color: #2d3748;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .input-group-text {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+}
+
+body.dark-theme .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+}
+
+body.dark-theme .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+body.dark-theme .text-muted {
+    color: #a0aec0 !important;
+}
+
+body.dark-theme .dropdown-menu {
+    background-color: #1a202c;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .dropdown-item {
+    color: #e2e8f0;
+}
+
+body.dark-theme .dropdown-item:hover,
+body.dark-theme .dropdown-item.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.container {
+    max-width: 800px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+h1 {
+    color: #4e54c8;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #4e54c8, #8f94fb);
+    border-radius: 2px;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    animation: fadeIn 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.list-group-item:hover {
+    background-color: rgba(78, 84, 200, 0.05);
+    transform: translateX(5px);
+}
+
+.list-group-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(to bottom, #4e54c8, #8f94fb);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.list-group-item:hover::before {
+    opacity: 1;
+}
+
+.list-group-item:first-child {
+    border-top: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.list-group-item:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.task-text {
+    flex-grow: 1;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+    padding: 5px 0;
+    font-size: 1.05rem;
+}
+
+.task-controls {
+    display: flex;
+    gap: 10px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.list-group-item:hover .task-controls {
+    opacity: 1;
+}
+
+.completed .task-text {
+    text-decoration: line-through;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.btn {
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #4e54c8, #8f94fb);
+    border: none;
+    box-shadow: 0 4px 10px rgba(78, 84, 200, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #3d43a2, #7a7fe6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(78, 84, 200, 0.4);
+}
+
+.btn-outline-success, .btn-outline-secondary, .btn-outline-danger {
+    border-width: 2px;
+}
+
+.btn-outline-success:hover, 
+.btn-outline-danger:hover,
+.btn-outline-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+}
+
+#searchInput {
+    background-color: rgba(248, 249, 250, 0.7);
+    border-radius: 20px;
+    padding-left: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#searchInput:focus {
+    background-color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(78, 84, 200, 0.25);
+    border-color: rgba(78, 84, 200, 0.5);
+}
+
+.input-group {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.input-group-text {
+    background-color: rgba(78, 84, 200, 0.1);
+    border: 1px solid rgba(78, 84, 200, 0.2);
+    color: #4e54c8;
+}
+
+.card-header {
+    background: linear-gradient(to right, rgba(78, 84, 200, 0.05), rgba(143, 148, 251, 0.05));
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 15px 20px;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.list-group {
+    padding: 10px;
+}
+
+#taskCounter {
+    background-color: rgba(78, 84, 200, 0.1);
+    padding: 6px 15px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    color: #4e54c8;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+#totalCount, #completedCount, #pendingCount {
+    font-weight: 600;
+}
+
+#clearAllBtn {
+    transition: all 0.3s ease;
+}
+
+#clearAllBtn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.empty-state {
+    text-align: center;
+    padding: 30px 0;
+    color: #6c757d;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: rgba(78, 84, 200, 0.2);
+}
+
+/* Ajout d'une animation pour les éléments complétés */
+.list-group-item.completed {
+    background-color: rgba(40, 167, 69, 0.05);
+}
+
+/* Style pour le test input en bas */
+.container:last-child {
+    margin-top: 20px;
+}
