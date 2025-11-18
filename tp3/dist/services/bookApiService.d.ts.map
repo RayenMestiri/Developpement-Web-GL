@@ -1,0 +1,1 @@
+{"version":3,"file":"bookApiService.d.ts","sourceRoot":"","sources":["../../src/services/bookApiService.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,IAAI,EAAE,MAAM,mBAAmB,CAAC;AAE9C,MAAM,WAAW,WAAW,CAAC,CAAC;IAAI,IAAI,EAAE,CAAC,CAAC;IAAC,KAAK,CAAC,EAAE,MAAM,CAAC;CAAE;AAE5D,qBAAa,cAAc;IACzB,MAAM,CAAC,UAAU,IAAI,WAAW,CAAC,IAAI,EAAE,CAAC;CAQzC"}
