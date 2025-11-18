@@ -1,0 +1,131 @@
+<!-- 
+  Template EtudiantForm - Formulaire basé sur un modèle
+  TP6 - Sections III à IX
+-->
+
+<!-- Section IX : Zone visible avant la soumission -->
+<div class="container" [hidden]="submitted">
+  <h1>Formulaire Étudiant</h1>
+
+  <!-- 
+    Section IV & VIII : Formulaire avec NgForm
+    - #etudiantForm="ngForm" : Variable de référence pour accéder à NgForm
+    - (ngSubmit) : Événement de soumission du formulaire
+  -->
+  <form (ngSubmit)="onSubmit()" #etudiantForm="ngForm">
+
+    <!-- Section IV : Diagnostic (à supprimer en production) -->
+    <div class="alert alert-info">
+      <strong>Diagnostic (développement) :</strong> {{ diagnostic }}
+    </div>
+
+    <!-- 
+      Section III & IV : Champ Name (obligatoire)
+      - [(ngModel)] : Liaison bidirectionnelle avec le modèle
+      - name="name" : Requis pour l'enregistrement avec NgForm
+      - required : Validation HTML5
+      - #name="ngModel" : Variable de référence pour accéder au contrôle
+    -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="name"
+        required
+        [(ngModel)]="model.name" 
+        name="name"
+        #name="ngModel"
+      >
+      <!-- 
+        Section V & VII : Message d'erreur de validation
+        - [hidden] : Masque le message si le champ est valide OU vierge (pristine)
+      -->
+      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+        Name is required
+      </div>
+    </div>
+
+    <!-- Section III & IV : Champ Surname (facultatif) -->
+    <div class="form-group">
+      <label for="Surname">SurName</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="Surname"
+        [(ngModel)]="model.Surname" 
+        name="Surname"
+      >
+    </div>
+
+    <!-- 
+      Section III & IV : Champ Classe (obligatoire avec select)
+      - @for : Nouvelle syntaxe Angular pour boucle (remplace *ngFor)
+      - required : Validation HTML5
+    -->
+    <div class="form-group">
+      <label for="classe">Classe</label>
+      <select 
+        class="form-control" 
+        id="classe"
+        required
+        [(ngModel)]="model.classe" 
+        name="classe"
+        #classe="ngModel"
+      >
+        @for (pow of classes; track pow) {
+          <option [value]="pow">{{ pow }}</option>
+        }
+      </select>
+      <!-- Section VII : Message d'erreur pour classe -->
+      <div [hidden]="classe.valid || classe.pristine" class="alert alert-danger">
+        Classe is required
+      </div>
+    </div>
+
+    <!-- 
+      Section VIII : Boutons d'action
+      - [disabled] : Désactive le bouton Submit si le formulaire est invalide
+    -->
+    <button 
+      type="submit" 
+      class="btn btn-success"
+      [disabled]="!etudiantForm.form.valid"
+    >
+      Submit
+    </button>
+
+    <!-- Section VII : Bouton pour créer un nouveau étudiant -->
+    <button 
+      type="button" 
+      class="btn btn-default"
+      (click)="newEtudiant(); etudiantForm.reset()"
+    >
+      New Etudiant
+    </button>
+  </form>
+</div>
+
+<!-- Section IX : Zone visible après la soumission -->
+<div class="container" [hidden]="!submitted">
+  <h2>You submitted the following:</h2>
+  
+  <div class="row">
+    <div class="col-xs-3">Name</div>
+    <div class="col-xs-9">{{ model.name }}</div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-3">Sur Name</div>
+    <div class="col-xs-9">{{ model.Surname }}</div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-3">Classe</div>
+    <div class="col-xs-9">{{ model.classe }}</div>
+  </div>
+  
+  <br>
+  <!-- Bouton pour revenir en mode édition -->
+  <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+</div>

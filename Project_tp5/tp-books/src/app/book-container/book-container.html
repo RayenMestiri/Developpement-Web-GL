@@ -1,0 +1,47 @@
+<!-- 
+  Template du BookContainer - Composant parent principal
+  Partie 5 - Utilisation de book-container comme composant principal
+-->
+<div class="container">
+  <!-- En-tête de l'application -->
+  <header class="header">
+    <h1>📚 Book Catalog</h1>
+    <p class="subtitle">Gestion complète de votre catalogue de livres</p>
+  </header>
+
+  <div class="content-grid">
+    <!-- Section Formulaire (gauche) -->
+    <section class="form-section">
+      <h2>{{ bookToEdit ? '✏️ Modifier un livre' : '➕ Ajouter un livre' }}</h2>
+      
+      <!-- 
+        Partie 9 - Point 18 : Transmettre le livre à éditer au formulaire
+        Partie 6 - Point 14 : Réception du nouveau livre via @Output
+        Partie 9 - Point 19 : Réception de la mise à jour via @Output
+      -->
+      <app-book-form
+        [categories]="categories"
+        [bookToEdit]="bookToEdit"
+        (bookAdded)="addBook($event)"
+        (bookUpdated)="updateBook($event)"
+        (editCancelled)="cancelEdit()"
+      ></app-book-form>
+    </section>
+
+    <!-- Section Liste (droite) -->
+    <section class="list-section">
+      <h2>📖 Liste des livres</h2>
+      
+      <!-- 
+        Partie 2 - Point 8 : Transmission de la liste via @Input
+        Partie 8 - Point 17 : Réception de l'événement de suppression
+        Partie 9 - Point 18 : Réception de l'événement d'édition
+      -->
+      <app-book-list
+        [books]="books"
+        (bookDeleted)="deleteBook($event)"
+        (bookEdited)="editBook($event)"
+      ></app-book-list>
+    </section>
+  </div>
+</div>

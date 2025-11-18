@@ -1,0 +1,37 @@
+<!-- Application principale TP3 -->
+<div class="app-container">
+  <header class="app-header">
+    <h1>🎓 TP3 - Data Binding et Interpolation</h1>
+    <p>Ateliers Pratiques Angular</p>
+  </header>
+
+  <section class="section">
+    <h2>📌 Activité 1 : Interpolation</h2>
+    <app-bienvenue></app-bienvenue>
+  </section>
+
+  <section class="section">
+    <h2>📌 Activité 4 : Two-Way Binding</h2>
+    <app-utilisateur></app-utilisateur>
+  </section>
+
+  <section class="section">
+    <h2>📌 Activités 2-8 : Produits</h2>
+    <div class="produits-grid">
+      <app-produit
+        [nomProduit]="'Ordinateur Portable'"
+        (ajouterAuPanier)="gererAjoutAuPanier($event)">
+      </app-produit>
+      <app-produit
+        [nomProduit]="'Smartphone'"
+        (ajouterAuPanier)="gererAjoutAuPanier($event)">
+      </app-produit>
+    </div>
+    <app-panier [items]="panierItems"></app-panier>
+  </section>
+
+  <section class="section">
+    <h2>🎮 Projet Quiz</h2>
+    <app-home></app-home>
+  </section>
+</div>

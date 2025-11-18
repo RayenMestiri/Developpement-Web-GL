@@ -1,0 +1,134 @@
+<!-- 
+  Template BookList - Affichage de la liste des livres
+  Partie 7 - Point 15, 16 : Affichage avec @for
+  Partie 10 - Points 21, 22, 23 : Recherche, tri, compteurs
+-->
+<div class="book-list-container">
+  
+  <!-- Partie 10 - Point 23 : Compteurs dynamiques -->
+  <div class="stats-cards">
+    <div class="stat-card total">
+      <span class="stat-number">{{ getTotalBooks() }}</span>
+      <span class="stat-label">Total Livres</span>
+    </div>
+    <div class="stat-card available">
+      <span class="stat-number">{{ getAvailableBooks() }}</span>
+      <span class="stat-label">Disponibles</span>
+    </div>
+    <div class="stat-card unavailable">
+      <span class="stat-number">{{ getUnavailableBooks() }}</span>
+      <span class="stat-label">Non Disponibles</span>
+    </div>
+  </div>
+
+  <!-- Partie 10 - Point 21 : Barre de recherche -->
+  <div class="search-sort-bar">
+    <div class="search-box">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="🔍 Rechercher par titre, auteur ou catégorie..."
+        class="search-input"
+      />
+    </div>
+
+    <!-- Partie 10 - Point 22 : Tri -->
+    <div class="sort-box">
+      <label for="sortBy">Trier par :</label>
+      <select id="sortBy" [(ngModel)]="sortBy" class="sort-select">
+        <option value="none">-- Par défaut --</option>
+        <option value="category">Catégorie</option>
+        <option value="available">Disponibilité</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Partie 7 - Point 15 : Afficher la liste dans un tableau -->
+  @if (getFilteredBooks().length === 0) {
+    <div class="empty-state">
+      @if (searchTerm) {
+        <p>🔍 Aucun livre ne correspond à votre recherche "{{ searchTerm }}"</p>
+      } @else {
+        <p>📭 Aucun livre dans le catalogue. Ajoutez-en un !</p>
+      }
+    </div>
+  } @else {
+    <div class="table-responsive">
+      <table class="books-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Catégorie</th>
+            <th>Date</th>
+            <th>Stock</th>
+            <th>Disponible</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Partie 7 - Point 16 : Utiliser @for avec track -->
+          @for (book of getFilteredBooks(); track book.id) {
+            <tr [class.unavailable-row]="!book.isAvailable">
+              <td>{{ book.id }}</td>
+              <td class="book-title">
+                <strong>{{ book.title }}</strong>
+              </td>
+              <td>{{ book.author }}</td>
+              <td>
+                <span class="badge" [class]="'badge-' + book.category.toLowerCase()">
+                  {{ book.category }}
+                </span>
+              </td>
+              <td>{{ book.releaseDate | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                @if (book.stock !== undefined) {
+                  <span class="stock-badge" [class.low-stock]="book.stock < 5">
+                    {{ book.stock }}
+                  </span>
+                } @else {
+                  <span class="stock-badge">-</span>
+                }
+              </td>
+              <td>
+                @if (book.isAvailable) {
+                  <span class="status-badge available">✅ Oui</span>
+                } @else {
+                  <span class="status-badge unavailable">❌ Non</span>
+                }
+              </td>
+              <td class="actions">
+                <!-- Partie 9 - Point 18 : Bouton Éditer -->
+                <button
+                  class="btn-action btn-edit"
+                  (click)="onEdit(book)"
+                  title="Modifier"
+                >
+                  ✏️
+                </button>
+                <!-- Partie 8 - Point 17 : Bouton Supprimer -->
+                <button
+                  class="btn-action btn-delete"
+                  (click)="onDelete(book.id)"
+                  title="Supprimer"
+                >
+                  🗑️
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  <!-- Informations sur le filtrage -->
+  @if (searchTerm && getFilteredBooks().length > 0) {
+    <div class="filter-info">
+      <small>
+        📊 Affichage de {{ getFilteredBooks().length }} livre(s) sur {{ getTotalBooks() }}
+      </small>
+    </div>
+  }
+</div>

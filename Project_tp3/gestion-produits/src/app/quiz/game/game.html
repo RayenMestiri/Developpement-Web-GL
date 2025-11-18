@@ -1,0 +1,52 @@
+<div class="game-container">
+  <div *ngIf="!quizTermine">
+    <!-- Score en temps réel -->
+    <div class="score-header">
+      <app-score 
+        [score]="score" 
+        [bonnesReponses]="bonnesReponses" 
+        [mauvaisesReponses]="mauvaisesReponses">
+      </app-score>
+    </div>
+
+    <!-- Question actuelle -->
+    <div class="question-section">
+      <h3>Question {{ currentQuestionIndex + 1 }} / {{ questions.length }}</h3>
+      <p class="question-text">{{ currentQuestion.question }}</p>
+
+      <!-- Options de réponse -->
+      <div class="options">
+        <button 
+          *ngFor="let option of currentQuestion.options"
+          class="option-btn"
+          [class.selected]="currentQuestion.selectedOption === option"
+          [class.correct]="currentQuestion.answered && option === currentQuestion.reponse"
+          [class.incorrect]="currentQuestion.answered && currentQuestion.selectedOption === option && option !== currentQuestion.reponse"
+          [disabled]="currentQuestion.answered"
+          (click)="onSelectOption(option)">
+          {{ option }}
+        </button>
+      </div>
+
+      <button 
+        *ngIf="currentQuestion.answered" 
+        class="btn btn-next"
+        (click)="nextQuestion()">
+        {{ currentQuestionIndex < questions.length - 1 ? 'Question Suivante ➡️' : 'Voir les Résultats 🏆' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Résultats finaux -->
+  <div *ngIf="quizTermine" class="results">
+    <h2>🎉 Quiz Terminé !</h2>
+    <div class="final-score">
+      <p>Score Final : <strong>{{ score }} points</strong></p>
+      <p>✅ Bonnes Réponses : {{ bonnesReponses }}</p>
+      <p>❌ Mauvaises Réponses : {{ mauvaisesReponses }}</p>
+    </div>
+    <button class="btn btn-restart" (click)="restartQuiz()">
+      🔄 Recommencer
+    </button>
+  </div>
+</div>

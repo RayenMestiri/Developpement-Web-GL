@@ -1,0 +1,40 @@
+<!-- 
+  Composant Produit - TP3 Activités 2, 3, 5, 7, 8
+  Property Binding, Event Binding, Class/Style Binding, Pipes
+-->
+<div class="produit-container" 
+     [ngClass]="{'en-stock': enStock, 'hors-stock': !enStock}"
+     [ngStyle]="{'opacity': enStock ? '1' : '0.5'}">
+  
+  <!-- Activité 7.3 : Affichage du nom du produit via @Input -->
+  <h3>{{ nomProduit }}</h3>
+
+  <!-- Activité 2.3 : Property Binding pour l'image -->
+  <img [src]="imageUrl" [alt]="nomProduit" class="produit-image">
+
+  <!-- Activité 8.2 : Utilisation des pipes pour formater le prix -->
+  <p class="prix">Prix : {{ prix }}  €</p>
+
+  <!-- Indicateur de disponibilité -->
+  <p class="stock-status">
+    <span *ngIf="enStock" class="badge badge-success">✅ En Stock</span>
+    <span *ngIf="!enStock" class="badge badge-danger">❌ Hors Stock</span>
+  </p>
+
+  <p class="description">Description du produit...</p>
+
+  <!-- Boutons d'action -->
+  <div class="actions">
+    <!-- Activité 5.5 : Bouton pour basculer l'état du stock -->
+    <button class="btn btn-secondary" (click)="toggleStock()">
+      {{ enStock ? 'Marquer comme Hors Stock' : 'Marquer comme En Stock' }}
+    </button>
+
+    <!-- Activité 3.2 : Event Binding sur le clic du bouton -->
+    <button class="btn btn-primary" 
+            (click)="ajouterProduit()" 
+            [disabled]="!enStock">
+      Ajouter au Panier
+    </button>
+  </div>
+</div>

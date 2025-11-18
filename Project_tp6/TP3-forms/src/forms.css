@@ -1,0 +1,21 @@
+/**
+ * Forms.css - Styles globaux pour les formulaires
+ * TP6 - Section VI : CSS personnalisé pour feedback visuel
+ * 
+ * Classes CSS suivant l'état des contrôles Angular
+ */
+
+/* Barre verte pour les champs valides et obligatoires */
+.ng-valid[required], .ng-valid.required {
+  border-left: 5px solid #42A948;
+}
+
+/* Barre rouge pour les champs invalides (sauf le formulaire lui-même) */
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442;
+}
+
+/* Transitions douces */
+input, select, textarea {
+  transition: border-left 0.3s ease;
+}

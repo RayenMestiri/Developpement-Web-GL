@@ -1,0 +1,227 @@
+<!-- 
+  Template BookForm - Formulaire template-driven
+  Partie 3 - Point 9 : Structure du formulaire
+  Partie 4 - Point 11 : Validations
+  Partie 5 - Point 12 : Messages d'erreur
+-->
+<form #bookForm="ngForm" (ngSubmit)="onSubmit(bookForm)" class="book-form">
+  
+  <!-- Partie 3 - Point 10 : Champ Title -->
+  <div class="form-group">
+    <label for="title">Titre <span class="required">*</span></label>
+    <input
+      type="text"
+      id="title"
+      name="title"
+      [(ngModel)]="book.title"
+      #title="ngModel"
+      required
+      minlength="3"
+      placeholder="Ex: Le Petit Prince"
+      [class.error-field]="hasError(title)"
+    />
+    <!-- Partie 5 - Point 12 : Messages d'erreur -->
+    @if (hasError(title)) {
+      <div class="error-message">
+        @if (title.errors?.['required']) {
+          <span>⚠️ Le titre est obligatoire</span>
+        }
+        @if (title.errors?.['minlength']) {
+          <span>⚠️ Le titre doit contenir au moins 3 caractères</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Partie 3 - Point 10 : Champ Author -->
+  <div class="form-group">
+    <label for="author">Auteur <span class="required">*</span></label>
+    <input
+      type="text"
+      id="author"
+      name="author"
+      [(ngModel)]="book.author"
+      #author="ngModel"
+      required
+      minlength="3"
+      placeholder="Ex: Antoine de Saint-Exupéry"
+      [class.error-field]="hasError(author)"
+    />
+    @if (hasError(author)) {
+      <div class="error-message">
+        @if (author.errors?.['required']) {
+          <span>⚠️ L'auteur est obligatoire</span>
+        }
+        @if (author.errors?.['minlength']) {
+          <span>⚠️ Le nom de l'auteur doit contenir au moins 3 caractères</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Partie 3 - Point 10 : Champ Publisher Email -->
+  <div class="form-group">
+    <label for="publisherEmail">Email de l'éditeur <span class="required">*</span></label>
+    <input
+      type="email"
+      id="publisherEmail"
+      name="publisherEmail"
+      [(ngModel)]="book.publisherEmail"
+      #publisherEmail="ngModel"
+      required
+      email
+      placeholder="Ex: editeur@example.com"
+      [class.error-field]="hasError(publisherEmail)"
+    />
+    @if (hasError(publisherEmail)) {
+      <div class="error-message">
+        @if (publisherEmail.errors?.['required']) {
+          <span>⚠️ L'email est obligatoire</span>
+        }
+        @if (publisherEmail.errors?.['email']) {
+          <span>⚠️ L'email n'est pas valide</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Partie 3 - Point 10 : Champ Publisher Phone -->
+  <!-- Partie 4 - Point 11 : Pattern pour téléphone tunisien (8 chiffres) -->
+  <div class="form-group">
+    <label for="publisherPhone">Téléphone de l'éditeur</label>
+    <input
+      type="tel"
+      id="publisherPhone"
+      name="publisherPhone"
+      [(ngModel)]="book.publisherPhone"
+      #publisherPhone="ngModel"
+      pattern="^[0-9]{8}$"
+      placeholder="Ex: 71234567"
+      [class.error-field]="hasError(publisherPhone)"
+    />
+    @if (hasError(publisherPhone)) {
+      <div class="error-message">
+        @if (publisherPhone.errors?.['pattern']) {
+          <span>⚠️ Le téléphone doit contenir exactement 8 chiffres</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Partie 3 - Point 10 : Champ Release Date -->
+  <!-- Partie 4 - Point 11 : Validation > 1900 -->
+  <div class="form-group">
+    <label for="releaseDate">Date de sortie <span class="required">*</span></label>
+    <input
+      type="date"
+      id="releaseDate"
+      name="releaseDate"
+      [(ngModel)]="book.releaseDate"
+      #releaseDate="ngModel"
+      required
+      min="1900-01-01"
+      [max]="getCurrentDate()"
+      [class.error-field]="hasError(releaseDate)"
+    />
+    @if (hasError(releaseDate)) {
+      <div class="error-message">
+        @if (releaseDate.errors?.['required']) {
+          <span>⚠️ La date de sortie est obligatoire</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Partie 3 - Point 10 : Champ Category (select) -->
+  <div class="form-group">
+    <label for="category">Catégorie <span class="required">*</span></label>
+    <select
+      id="category"
+      name="category"
+      [(ngModel)]="book.category"
+      #category="ngModel"
+      required
+      [class.error-field]="hasError(category)"
+    >
+      <option value="" disabled>-- Choisir une catégorie --</option>
+      @for (cat of categories; track cat) {
+        <option [value]="cat">{{ cat }}</option>
+      }
+    </select>
+    @if (hasError(category)) {
+      <div class="error-message">
+        @if (category.errors?.['required']) {
+          <span>⚠️ La catégorie est obligatoire</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Partie 3 - Point 10 : Champ Stock -->
+  <!-- Partie 4 - Point 11 : Validation min=0 -->
+  <div class="form-group">
+    <label for="stock">Stock</label>
+    <input
+      type="number"
+      id="stock"
+      name="stock"
+      [(ngModel)]="book.stock"
+      #stock="ngModel"
+      min="0"
+      placeholder="Ex: 10"
+      [class.error-field]="hasError(stock)"
+    />
+    @if (hasError(stock)) {
+      <div class="error-message">
+        @if (stock.errors?.['min']) {
+          <span>⚠️ Le stock ne peut pas être négatif</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Partie 3 - Point 10 : Champ isAvailable (checkbox) -->
+  <div class="form-group checkbox-group">
+    <label>
+      <input
+        type="checkbox"
+        id="isAvailable"
+        name="isAvailable"
+        [(ngModel)]="book.isAvailable"
+      />
+      <span>Disponible à la vente</span>
+    </label>
+  </div>
+
+  <!-- Boutons d'action -->
+  <div class="form-actions">
+    <!-- Partie 9 - Point 18 : Changer le bouton selon le mode -->
+    @if (isEditMode) {
+      <button type="submit" class="btn btn-primary" [disabled]="!bookForm.valid">
+        ✏️ Mettre à jour
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
+        ❌ Annuler
+      </button>
+    } @else {
+      <button type="submit" class="btn btn-primary" [disabled]="!bookForm.valid">
+        ➕ Ajouter
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm(bookForm)">
+        🔄 Réinitialiser
+      </button>
+    }
+  </div>
+
+  <!-- État du formulaire (pour debug) -->
+  <div class="form-status">
+    <small>
+      État : 
+      @if (bookForm.valid) {
+        <span class="status-valid">✅ Valide</span>
+      } @else {
+        <span class="status-invalid">❌ Invalide</span>
+      }
+    </small>
+  </div>
+</form>

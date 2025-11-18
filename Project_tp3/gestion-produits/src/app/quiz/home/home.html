@@ -1,0 +1,13 @@
+<div class="quiz-home">
+  <div *ngIf="!showGame" class="welcome-screen">
+    <h2>🎮 Bienvenue au Quiz Angular !</h2>
+    <p>Testez vos connaissances en répondant à une série de questions.</p>
+    <button class="btn btn-start" (click)="startQuiz()">
+      🚀 Commencer le Quiz
+    </button>
+  </div>
+
+  <div *ngIf="showGame">
+    <app-game (quizFinished)="resetQuiz()"></app-game>
+  </div>
+</div>

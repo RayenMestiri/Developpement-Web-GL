@@ -1,0 +1,125 @@
+.game-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.score-header {
+  margin-bottom: 30px;
+}
+
+.question-section {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.question-section h3 {
+  color: #667eea;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.question-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.options {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.option-btn {
+  padding: 20px;
+  border: 3px solid #ddd;
+  background: white;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: #667eea;
+  transform: translateX(5px);
+}
+
+.option-btn.selected {
+  border-color: #667eea;
+  background: #f0f4ff;
+}
+
+.option-btn.correct {
+  border-color: #28a745;
+  background: #d4edda;
+}
+
+.option-btn.incorrect {
+  border-color: #dc3545;
+  background: #f8d7da;
+}
+
+.option-btn:disabled {
+  cursor: not-allowed;
+}
+
+.btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-next {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  width: 100%;
+}
+
+.btn-next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.results {
+  background: white;
+  padding: 60px 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.results h2 {
+  font-size: 2.5rem;
+  color: #667eea;
+  margin-bottom: 30px;
+}
+
+.final-score {
+  margin: 40px 0;
+  font-size: 1.3rem;
+}
+
+.final-score p {
+  margin: 15px 0;
+}
+
+.btn-restart {
+  background: #28a745;
+  color: white;
+  padding: 15px 40px;
+}
+
+.btn-restart:hover {
+  background: #218838;
+  transform: translateY(-2px);
+}
