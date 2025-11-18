@@ -1,0 +1,193 @@
+<div class="taches-container">
+  <h1>Activités 5 & 6 : Gestion de Tâches Complète</h1>
+  <p class="subtitle">Combinaison de *ngIf, *ngFor, [ngClass] et [ngStyle]</p>
+
+  <!-- Statistiques -->
+  <div class="stats-container">
+    <div class="stat-card total">
+      <span class="stat-number">{{ taches.length }}</span>
+      <span class="stat-label">Total</span>
+    </div>
+    <div class="stat-card completes">
+      <span class="stat-number">{{ getNombreTachesCompletes() }}</span>
+      <span class="stat-label">Complétées</span>
+    </div>
+    <div class="stat-card incompletes">
+      <span class="stat-number">{{ getNombreTachesIncompletes() }}</span>
+      <span class="stat-label">En cours</span>
+    </div>
+  </div>
+
+  <!-- Formulaire d'ajout -->
+  <div class="form-section">
+    <h2>➕ Ajouter une tâche</h2>
+    
+    <div class="form-row">
+      <input 
+        type="text" 
+        [(ngModel)]="nouvelleDescription" 
+        placeholder="Description de la tâche..."
+        class="input-task"
+        (keyup.enter)="ajouterTache()"
+      />
+      
+      <select [(ngModel)]="nouvellePriorite" class="select-priority">
+        <option value="haute">🔴 Haute</option>
+        <option value="moyenne">🟠 Moyenne</option>
+        <option value="basse">🟢 Basse</option>
+      </select>
+      
+      <button (click)="ajouterTache()" class="btn-add">
+        Ajouter
+      </button>
+    </div>
+  </div>
+
+  <!-- Filtres et actions -->
+  <div class="filters-section">
+    <div class="filters">
+      <button 
+        (click)="filtreStatut = 'toutes'" 
+        [class.active]="filtreStatut === 'toutes'"
+        class="btn-filter"
+      >
+        Toutes ({{ taches.length }})
+      </button>
+      <button 
+        (click)="filtreStatut = 'incompletes'" 
+        [class.active]="filtreStatut === 'incompletes'"
+        class="btn-filter"
+      >
+        En cours ({{ getNombreTachesIncompletes() }})
+      </button>
+      <button 
+        (click)="filtreStatut = 'completes'" 
+        [class.active]="filtreStatut === 'completes'"
+        class="btn-filter"
+      >
+        Complétées ({{ getNombreTachesCompletes() }})
+      </button>
+    </div>
+
+    <div class="actions-rapides">
+      <button (click)="marquerToutesCompletes()" class="btn-action-mini">
+        ✓ Tout cocher
+      </button>
+      <button (click)="supprimerTachesCompletes()" class="btn-action-mini danger">
+        🗑️ Supprimer complétées
+      </button>
+    </div>
+  </div>
+
+  <!-- 
+    *ngIf avec else : Affichage conditionnel avancé (Activité 6)
+    Si la liste est vide, affiche le template "pasDeTaches"
+  -->
+  <div *ngIf="getTachesFiltrees().length > 0; else pasDeTaches" class="taches-list">
+    <!-- 
+      *ngFor : Itération sur les tâches filtrées
+      let i = index : récupère l'index de chaque élément
+    -->
+    <div 
+      *ngFor="let tache of getTachesFiltrees(); let i = index" 
+      class="tache-item"
+      [ngClass]="{'tache-completee': tache.statut}"
+    >
+      <!-- Checkbox pour marquer comme complétée -->
+      <div class="tache-checkbox">
+        <input 
+          type="checkbox" 
+          [checked]="tache.statut"
+          (change)="toggleStatut(tache)"
+          [id]="'tache-' + i"
+        />
+        <label [for]="'tache-' + i"></label>
+      </div>
+
+      <!-- Description de la tâche -->
+      <!-- 
+        [ngClass] : Applique la classe 'completed-text' si statut est true
+        Permet de barrer le texte des tâches complétées
+      -->
+      <div class="tache-content" [ngClass]="{'completed-text': tache.statut}">
+        <span class="tache-description">{{ tache.description }}</span>
+      </div>
+
+      <!-- Badge de priorité -->
+      <!-- 
+        [ngStyle] : Applique des styles CSS dynamiques
+        La couleur change selon la priorité :
+        Rouge pour 'haute', Orange pour 'moyenne', Vert pour 'basse'
+      -->
+      <span 
+        class="tache-priorite"
+        [ngStyle]="{
+          'color': getCouleurPriorite(tache.priorite),
+          'border-color': getCouleurPriorite(tache.priorite),
+          'font-weight': tache.priorite === 'haute' ? 'bold' : 'normal'
+        }"
+      >
+        {{ tache.priorite }}
+      </span>
+
+      <!-- Boutons d'action -->
+      <div class="tache-actions">
+        <button 
+          (click)="toggleStatut(tache)" 
+          class="btn-toggle"
+          [title]="tache.statut ? 'Marquer comme non complétée' : 'Marquer comme complétée'"
+        >
+          {{ tache.statut ? '↩️' : '✓' }}
+        </button>
+        <button 
+          (click)="supprimerTache(i)" 
+          class="btn-delete-small"
+          title="Supprimer la tâche"
+        >
+          🗑️
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 
+    ng-template : Template alternatif pour *ngIf...else (Activité 6)
+    Affiche un message personnalisé quand il n'y a pas de tâches
+  -->
+  <ng-template #pasDeTaches>
+    <div class="empty-state">
+      <div class="empty-icon">📝</div>
+      <h3>Vous n'avez pas de tâches en cours</h3>
+      <p>Ajoutez votre première tâche pour commencer!</p>
+    </div>
+  </ng-template>
+
+  <!-- Section d'explication -->
+  <div class="explanation">
+    <h3>📚 Directives utilisées dans ce composant</h3>
+    
+    <div class="directive-explanation">
+      <h4>1. *ngFor - Itération sur les tâches</h4>
+      <pre><code>*ngFor="let tache of getTachesFiltrees(); let i = index"</code></pre>
+      <p>Crée un élément pour chaque tâche filtrée et fournit l'index.</p>
+    </div>
+
+    <div class="directive-explanation">
+      <h4>2. *ngIf...else - Affichage conditionnel</h4>
+      <pre><code>*ngIf="getTachesFiltrees().length > 0; else pasDeTaches"</code></pre>
+      <p>Affiche la liste si elle contient des éléments, sinon affiche le template alternatif.</p>
+    </div>
+
+    <div class="directive-explanation">
+      <h4>3. [ngClass] - Classes CSS conditionnelles</h4>
+      <pre><code>[ngClass]="&#123;'tache-completee': tache.statut&#125;"</code></pre>
+      <p>Applique la classe 'tache-completee' si la tâche est complétée (statut = true).</p>
+    </div>
+
+    <div class="directive-explanation">
+      <h4>4. [ngStyle] - Styles CSS dynamiques</h4>
+      <pre><code>[ngStyle]="&#123;'color': getCouleurPriorite(tache.priorite)&#125;"</code></pre>
+      <p>Change la couleur du texte selon la priorité (rouge/orange/vert).</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,159 @@
+<div class="etudiant-container">
+  <h1>Atelier Guidé : Affichage Maître/Détail</h1>
+  <p class="subtitle">Gestion des étudiants avec *ngFor, *ngIf et [ngClass]</p>
+
+  <div class="content-grid">
+    <!-- Vue Maître : Liste des étudiants -->
+    <div class="master-view">
+      <h2>Liste des Étudiants</h2>
+      
+      <!-- 
+        *ngFor : Directive de répétition
+        - Itère sur le tableau 'etuds'
+        - 'e1' est la variable locale représentant chaque étudiant
+        - 'let i = index' récupère l'index de l'élément (commence à 0)
+      -->
+      <ul class="etudiants">
+        <li 
+          *ngFor="let e1 of etuds; let i = index"
+          [class.selected]="e1 === selectedEtudiant"
+          (click)="onSelect(e1)"
+          class="etudiant-item"
+        >
+          <!-- 
+            Badge avec l'ID de l'étudiant
+            La classe 'badge' est définie dans le CSS
+          -->
+          <span class="badge">{{ e1.id }}</span>
+          
+          <!-- 
+            Nom de l'étudiant avec interpolation
+          -->
+          <span class="nom">{{ e1.name }}</span>
+          
+          <!-- 
+            Classe si elle existe (propriété optionnelle)
+          -->
+          <span *ngIf="e1.classe" class="classe">{{ e1.classe }}</span>
+        </li>
+      </ul>
+
+      <div class="stats">
+        <p>Total d'étudiants : <strong>{{ etuds.length }}</strong></p>
+      </div>
+    </div>
+
+    <!-- Vue Détail : Détails de l'étudiant sélectionné -->
+    <div class="detail-view">
+      <h2>Détails de l'Étudiant</h2>
+      
+      <!-- 
+        *ngIf : Affichage conditionnel
+        Affiche les détails UNIQUEMENT si un étudiant est sélectionné
+        Sans *ngIf, on aurait une erreur si selectedEtudiant n'est pas défini
+      -->
+      <div *ngIf="selectedEtudiant; else noSelection" class="details-card">
+        <div class="detail-header">
+          <div class="avatar">{{ selectedEtudiant.name.charAt(0) }}</div>
+          <h3>{{ selectedEtudiant.name }}</h3>
+        </div>
+
+        <div class="detail-body">
+          <div class="detail-row">
+            <span class="label">ID:</span>
+            <span class="value">{{ selectedEtudiant.id }}</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">Nom:</span>
+            <span class="value">{{ selectedEtudiant.name }}</span>
+          </div>
+
+          <!-- Affiche la classe si elle existe -->
+          <div class="detail-row" *ngIf="selectedEtudiant.classe">
+            <span class="label">Classe:</span>
+            <span class="value">{{ selectedEtudiant.classe }}</span>
+          </div>
+
+          <!-- Nombre de lettres dans le nom (exemple d'expression) -->
+          <div class="detail-row">
+            <span class="label">Lettres dans le nom:</span>
+            <span class="value">{{ selectedEtudiant.name.length }}</span>
+          </div>
+        </div>
+
+        <div class="detail-footer">
+          <button (click)="selectedEtudiant = undefined!" class="btn-clear">
+            ✖ Désélectionner
+          </button>
+        </div>
+      </div>
+
+      <!-- 
+        ng-template avec #noSelection
+        Template alternatif affiché quand aucun étudiant n'est sélectionné
+        Utilisé avec *ngIf...else
+      -->
+      <ng-template #noSelection>
+        <div class="no-selection">
+          <div class="no-selection-icon">👆</div>
+          <h3>Aucun étudiant sélectionné</h3>
+          <p>Cliquez sur un étudiant dans la liste pour voir ses détails</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Section d'explication -->
+  <div class="explanation">
+    <h3>📚 Concepts démontrés</h3>
+    
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>*ngFor avec index</h4>
+        <pre><code>*ngFor="let e1 of etuds; let i = index"</code></pre>
+        <p>Itère sur chaque étudiant et fournit l'index.</p>
+      </div>
+
+      <div class="concept-card">
+        <h4>*ngIf avec else</h4>
+        <pre><code>*ngIf="selectedEtudiant; else noSelection"</code></pre>
+        <p>Affiche les détails si un étudiant est sélectionné, sinon affiche le template alternatif.</p>
+      </div>
+
+      <div class="concept-card">
+        <h4>[class.selected]</h4>
+        <pre><code>[class.selected]="e1 === selectedEtudiant"</code></pre>
+        <p>Applique la classe CSS 'selected' si l'étudiant est sélectionné.</p>
+      </div>
+
+      <div class="concept-card">
+        <h4>Event Binding (click)</h4>
+        <pre><code>(click)="onSelect(e1)"</code></pre>
+        <p>Appelle la méthode onSelect() quand on clique sur un étudiant.</p>
+      </div>
+    </div>
+
+    <div class="question-section">
+      <h4>❓ Questions du TP</h4>
+      <div class="question">
+        <strong>1. Pourquoi utilise-t-on "===" au lieu de "=="?</strong>
+        <p>L'opérateur === (égalité stricte) compare à la fois la valeur ET le type, tandis que == (égalité faible) effectue une conversion de type avant la comparaison. === est plus sûr et recommandé en TypeScript/JavaScript.</p>
+      </div>
+
+      <div class="question">
+        <strong>2. À quoi sert la directive *ngFor?</strong>
+        <ul>
+          <li>Afficher une liste dynamique d'éléments</li>
+          <li>Créer un élément HTML pour chaque item d'un tableau</li>
+          <li>Générer des tableaux, listes ou grilles à partir de données</li>
+        </ul>
+      </div>
+
+      <div class="question">
+        <strong>3. Pourquoi utiliser *ngIf pour les détails?</strong>
+        <p>Sans *ngIf, Angular essaierait d'afficher selectedEtudiant.name même quand selectedEtudiant est undefined, ce qui causerait une erreur. *ngIf empêche le rendu du bloc tant que la condition n'est pas remplie.</p>
+      </div>
+    </div>
+  </div>
+</div>

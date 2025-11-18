@@ -1,0 +1,224 @@
+.articles-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #34495e;
+  margin-bottom: 20px;
+}
+
+/* Formulaire */
+.form-section {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #555;
+}
+
+.input-field, .select-field {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus, .select-field:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.btn-add {
+  background-color: #27ae60;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.btn-add:hover {
+  background-color: #229954;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Liste des articles */
+.articles-list {
+  margin-top: 30px;
+}
+
+.article-card {
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border-left: 5px solid;
+  transition: all 0.3s;
+  position: relative;
+  animation: slideIn 0.5s ease-out;
+}
+
+.article-card:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Classes appliquées par [ngClass] */
+.important {
+  background-color: #ffcccc;
+  border-left-color: #e74c3c;
+}
+
+.moyen {
+  background-color: #fff2cc;
+  border-left-color: #f39c12;
+}
+
+.faible {
+  background-color: #ccffcc;
+  border-left-color: #27ae60;
+}
+
+.badge-importance {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.important .badge-importance {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.moyen .badge-importance {
+  background-color: #f39c12;
+  color: white;
+}
+
+.faible .badge-importance {
+  background-color: #27ae60;
+  color: white;
+}
+
+.article-card h3 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+}
+
+.article-card p {
+  margin: 10px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.article-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-delete {
+  background-color: #e74c3c;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+.empty-message {
+  text-align: center;
+  padding: 40px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  color: #7f8c8d;
+}
+
+/* Explication */
+.explanation {
+  background-color: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.explanation h3 {
+  color: #856404;
+  margin-top: 0;
+}
+
+.explanation-section {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.explanation-section h4 {
+  color: #3498db;
+  margin-top: 0;
+}
+
+.explanation ul {
+  line-height: 1.8;
+}
+
+.explanation li strong {
+  color: #e74c3c;
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

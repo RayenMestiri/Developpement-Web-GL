@@ -1,0 +1,69 @@
+<div class="welcome-container">
+  <h1>Activité 1 : Affichage conditionnel avec *ngIf</h1>
+
+  <!-- Section de connexion simple -->
+  <div class="login-section">
+    <h2>Connexion Simple</h2>
+    
+    <!-- Bouton pour basculer l'état de connexion -->
+    <button (click)="toggleLogin()" class="btn-toggle">
+      {{ isLoggedIn ? 'Se Déconnecter' : 'Se Connecter' }}
+    </button>
+
+    <!-- 
+      *ngIf : Directive structurelle pour affichage conditionnel
+      Affiche le message seulement si isLoggedIn est true
+    -->
+    <div *ngIf="isLoggedIn" class="welcome-message">
+      <p>✓ Bienvenue, utilisateur!</p>
+    </div>
+  </div>
+
+  <!-- DÉFI : Section de connexion avec validation -->
+  <div class="login-validation">
+    <h2>Connexion avec Validation (DÉFI)</h2>
+    
+    <div class="form-group">
+      <label for="username">Entrez votre prénom :</label>
+      <input 
+        type="text" 
+        id="username" 
+        [(ngModel)]="username" 
+        placeholder="Votre prénom"
+        class="input-field"
+      />
+    </div>
+
+    <button (click)="login()" class="btn-login">Se Connecter</button>
+
+    <!-- 
+      *ngIf : Affiche le message de bienvenue personnalisé
+      uniquement si l'utilisateur est connecté
+    -->
+    <div *ngIf="isLoggedIn" class="success-message">
+      <h3>🎉 Bienvenue, {{ username }}!</h3>
+      <p>Vous êtes maintenant connecté.</p>
+      <button (click)="logout()" class="btn-logout">Se Déconnecter</button>
+    </div>
+
+    <!-- 
+      *ngIf avec else : Affiche un message alternatif
+      si l'utilisateur n'est pas connecté
+    -->
+    <div *ngIf="!isLoggedIn" class="info-message">
+      <p>ℹ️ Veuillez vous connecter pour accéder au contenu.</p>
+      <small>Indice : Le nom attendu est "{{ expectedName }}"</small>
+    </div>
+  </div>
+
+  <!-- Section d'explication -->
+  <div class="explanation">
+    <h3>📚 Explication de *ngIf</h3>
+    <ul>
+      <li><strong>*ngIf="condition"</strong> : Affiche l'élément si la condition est vraie</li>
+      <li><strong>*ngIf="!condition"</strong> : Affiche l'élément si la condition est fausse</li>
+      <li>L'astérisque (*) est essentiel - c'est une syntaxe raccourcie</li>
+      <li>L'élément est complètement retiré du DOM quand la condition est fausse</li>
+    </ul>
+  </div>
+</div>

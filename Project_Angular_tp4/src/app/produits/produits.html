@@ -1,0 +1,186 @@
+<div class="produits-container">
+  <h1>Activité 4 : Styles dynamiques avec [ngStyle]</h1>
+
+  <!-- Formulaire d'ajout -->
+  <div class="form-section">
+    <h2>Ajouter un produit</h2>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nom du produit</label>
+        <input 
+          type="text" 
+          [(ngModel)]="nouveauNom" 
+          placeholder="Ex: Clavier"
+          class="input-field"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Stock</label>
+        <input 
+          type="number" 
+          [(ngModel)]="nouveauStock" 
+          placeholder="Quantité"
+          class="input-field"
+          min="0"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Prix (€)</label>
+        <input 
+          type="number" 
+          [(ngModel)]="nouveauPrix" 
+          placeholder="Prix"
+          class="input-field"
+          min="0"
+        />
+      </div>
+    </div>
+
+    <button (click)="ajouterProduit()" class="btn-add">
+      ➕ Ajouter le produit
+    </button>
+  </div>
+
+  <!-- Liste des produits -->
+  <div class="produits-list">
+    <h2>Gestion du Stock ({{ produits.length }} produits)</h2>
+
+    <!-- Légende -->
+    <div class="legend">
+      <span class="legend-item">
+        <span class="dot green"></span> Stock élevé (&gt; 50)
+      </span>
+      <span class="legend-item">
+        <span class="dot orange"></span> Stock moyen (20-50)
+      </span>
+      <span class="legend-item">
+        <span class="dot red"></span> Stock faible (&lt; 20)
+      </span>
+    </div>
+
+    <!-- 
+      Utilisation combinée de *ngFor et [ngStyle]
+      *ngFor itère sur les produits
+      [ngStyle] applique des styles dynamiques basés sur le stock
+    -->
+    <div class="table-container">
+      <table class="produits-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Stock</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produit of produits; let i = index" class="produit-row">
+            <!-- Numéro -->
+            <td>{{ i + 1 }}</td>
+            
+            <!-- Nom du produit -->
+            <td class="produit-nom">{{ produit.nom }}</td>
+            
+            <!-- Prix -->
+            <td>{{ produit.prix }}€</td>
+            
+            <!-- 
+              [ngStyle] : Applique des styles CSS dynamiques
+              La couleur change selon le niveau du stock
+              Vert > 50, Orange 20-50, Rouge < 20
+            -->
+            <td 
+              [ngStyle]="{
+                'color': getStockColor(produit.stock),
+                'font-weight': 'bold',
+                'font-size': '18px'
+              }"
+              class="stock-value"
+            >
+              {{ produit.stock }}
+            </td>
+            
+            <!-- Statut avec badge coloré -->
+            <td>
+              <span 
+                class="status-badge"
+                [ngStyle]="{
+                  'background-color': getStockColor(produit.stock),
+                  'color': 'white',
+                  'padding': '5px 10px',
+                  'border-radius': '20px',
+                  'font-size': '12px'
+                }"
+              >
+                {{ getStockStatus(produit.stock) }}
+              </span>
+            </td>
+            
+            <!-- Boutons d'action -->
+            <td class="actions">
+              <button 
+                (click)="augmenterStock(produit)" 
+                class="btn-action btn-increase"
+                title="Augmenter le stock"
+              >
+                ➕
+              </button>
+              <button 
+                (click)="diminuerStock(produit)" 
+                class="btn-action btn-decrease"
+                title="Diminuer le stock"
+              >
+                ➖
+              </button>
+              <button 
+                (click)="supprimerProduit(i)" 
+                class="btn-action btn-delete"
+                title="Supprimer"
+              >
+                🗑️
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Message si liste vide -->
+    <div *ngIf="produits.length === 0" class="empty-message">
+      <p>📦 Aucun produit en stock</p>
+    </div>
+  </div>
+
+  <!-- Section d'explication -->
+  <div class="explanation">
+    <h3>📚 Explication de [ngStyle]</h3>
+    <div class="explanation-content">
+      <h4>Syntaxe de [ngStyle]</h4>
+      <pre><code>[ngStyle]="&#123;
+  'propriété-css': valeur,
+  'autre-propriété': autreValeur
+&#125;"</code></pre>
+
+      <h4>Exemples d'utilisation</h4>
+      <ul>
+        <li><strong>Style simple :</strong> [ngStyle]="&#123;'color': 'red'&#125;"</li>
+        <li><strong>Style conditionnel :</strong> [ngStyle]="&#123;'color': stock > 50 ? 'green' : 'red'&#125;"</li>
+        <li><strong>Styles multiples :</strong> [ngStyle]="&#123;'color': couleur, 'font-size': taille + 'px'&#125;"</li>
+        <li><strong>Avec méthode :</strong> [ngStyle]="&#123;'color': getColor(value)&#125;"</li>
+      </ul>
+
+      <h4>Différence entre [ngStyle] et [ngClass]</h4>
+      <ul>
+        <li><strong>[ngClass]</strong> : Applique des classes CSS prédéfinies</li>
+        <li><strong>[ngStyle]</strong> : Applique des propriétés CSS en ligne directement</li>
+        <li>Utilisez [ngClass] pour les styles réutilisables</li>
+        <li>Utilisez [ngStyle] pour les styles calculés dynamiquement</li>
+      </ul>
+    </div>
+  </div>
+</div>

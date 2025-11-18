@@ -1,0 +1,175 @@
+.welcome-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 15px;
+}
+
+h2 {
+  color: #34495e;
+  margin-top: 30px;
+}
+
+.login-section, .login-validation {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin: 15px 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Styles des boutons */
+button {
+  padding: 12px 25px;
+  margin: 10px 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-toggle {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-toggle:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-login {
+  background-color: #27ae60;
+  color: white;
+}
+
+.btn-login:hover {
+  background-color: #229954;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-logout {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-logout:hover {
+  background-color: #c0392b;
+}
+
+/* Messages */
+.welcome-message {
+  background-color: #d4edda;
+  border: 2px solid #28a745;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 20px;
+  animation: slideIn 0.5s ease-out;
+}
+
+.success-message {
+  background-color: #d4edda;
+  border: 2px solid #28a745;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.success-message h3 {
+  color: #155724;
+  margin-top: 0;
+}
+
+.info-message {
+  background-color: #d1ecf1;
+  border: 2px solid #17a2b8;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.info-message small {
+  color: #0c5460;
+  font-style: italic;
+}
+
+.explanation {
+  background-color: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.explanation h3 {
+  color: #856404;
+  margin-top: 0;
+}
+
+.explanation ul {
+  line-height: 1.8;
+}
+
+.explanation li strong {
+  color: #e74c3c;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,120 @@
+<div class="articles-container">
+  <h1>Activités 2 & 3 : *ngFor et [ngClass]</h1>
+
+  <!-- Formulaire pour ajouter un nouvel article -->
+  <div class="form-section">
+    <h2>Ajouter un nouvel article</h2>
+    
+    <div class="form-group">
+      <label for="titre">Titre de l'article :</label>
+      <input 
+        type="text" 
+        id="titre"
+        [(ngModel)]="newTitle" 
+        placeholder="Titre de l'article"
+        class="input-field"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="contenu">Contenu :</label>
+      <input 
+        type="text" 
+        id="contenu"
+        [(ngModel)]="newContent" 
+        placeholder="Contenu de l'article"
+        class="input-field"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="importance">Niveau d'importance :</label>
+      <!-- 
+        Select pour choisir l'importance
+        Utilise [(ngModel)] pour le two-way binding
+      -->
+      <select id="importance" [(ngModel)]="newImportance" class="select-field">
+        <option value="élevée">Élevée</option>
+        <option value="moyenne">Moyenne</option>
+        <option value="faible">Faible</option>
+      </select>
+    </div>
+
+    <button (click)="addArticle()" class="btn-add">
+      ➕ Ajouter l'article
+    </button>
+  </div>
+
+  <!-- Liste des articles -->
+  <div class="articles-list">
+    <h2>Liste des Articles ({{ articles.length }})</h2>
+
+    <!-- 
+      *ngFor : Directive structurelle pour itérer sur le tableau
+      Syntaxe : *ngFor="let element of tableau"
+      'article' est la variable locale qui représente chaque élément
+      'let i = index' permet de récupérer l'index de l'élément
+    -->
+    <!-- 
+      [ngClass] : Directive d'attribut pour appliquer des classes CSS conditionnelles
+      Applique 'important', 'moyen' ou 'faible' selon l'importance
+    -->
+    <div 
+      *ngFor="let article of articles; let i = index" 
+      [ngClass]="{
+        'important': article.importance === 'élevée',
+        'moyen': article.importance === 'moyenne',
+        'faible': article.importance === 'faible'
+      }"
+      class="article-card"
+    >
+      <!-- Badge d'importance -->
+      <span class="badge-importance">{{ article.importance }}</span>
+      
+      <!-- Titre de l'article avec interpolation -->
+      <h3>{{ article.titre }}</h3>
+      
+      <!-- Contenu de l'article -->
+      <p>{{ article.contenu }}</p>
+      
+      <!-- Informations supplémentaires -->
+      <div class="article-footer">
+        <small>Article #{{ i + 1 }}</small>
+        <button (click)="deleteArticle(i)" class="btn-delete">
+          🗑️ Supprimer
+        </button>
+      </div>
+    </div>
+
+    <!-- Message si la liste est vide -->
+    <div *ngIf="articles.length === 0" class="empty-message">
+      <p>📭 Aucun article disponible. Ajoutez-en un!</p>
+    </div>
+  </div>
+
+  <!-- Section d'explication -->
+  <div class="explanation">
+    <h3>📚 Explications</h3>
+    <div class="explanation-section">
+      <h4>*ngFor - Directive de répétition</h4>
+      <ul>
+        <li><strong>*ngFor="let item of items"</strong> : Itère sur chaque élément du tableau</li>
+        <li><strong>let i = index</strong> : Récupère l'index de l'élément (commence à 0)</li>
+        <li><strong>let first = first</strong> : Boolean si c'est le premier élément</li>
+        <li><strong>let last = last</strong> : Boolean si c'est le dernier élément</li>
+        <li><strong>let even = even</strong> : Boolean si l'index est pair</li>
+        <li><strong>let odd = odd</strong> : Boolean si l'index est impair</li>
+      </ul>
+    </div>
+    
+    <div class="explanation-section">
+      <h4>[ngClass] - Classes CSS conditionnelles</h4>
+      <ul>
+        <li><strong>[ngClass]="'className'"</strong> : Applique une classe simple</li>
+        <li><strong>[ngClass]="{{ '{' }}'class1': condition1, 'class2': condition2{{ '}' }}"</strong> : Classes conditionnelles multiples</li>
+        <li>Les classes sont appliquées/retirées automatiquement selon les conditions</li>
+        <li>Idéal pour le feedback visuel basé sur les données</li>
+      </ul>
+    </div>
+  </div>
+</div>

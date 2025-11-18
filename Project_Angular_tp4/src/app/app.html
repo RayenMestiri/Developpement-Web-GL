@@ -1,0 +1,55 @@
+<div class="app-container">
+  <!-- En-tête de l'application -->
+  <header class="app-header">
+    <div class="header-content">
+      <h1 class="app-title">TP4 - Directives Angular</h1>
+      <p class="app-subtitle">Directives Structurelles et Attributs</p>
+    </div>
+  </header>
+
+  <!-- Menu de navigation -->
+  <nav class="app-nav">
+    <ul class="nav-list">
+      <li>
+        <a routerLink="/welcome" routerLinkActive="active" class="nav-link">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-text">Activité 1: *ngIf</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/articles" routerLinkActive="active" class="nav-link">
+          <span class="nav-icon">📝</span>
+          <span class="nav-text">Activités 2 & 3: *ngFor & [ngClass]</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/produits" routerLinkActive="active" class="nav-link">
+          <span class="nav-icon">📦</span>
+          <span class="nav-text">Activité 4: [ngStyle]</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/taches" routerLinkActive="active" class="nav-link">
+          <span class="nav-icon">✅</span>
+          <span class="nav-text">Activités 5 & 6: Combinaison</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/etudiant" routerLinkActive="active" class="nav-link">
+          <span class="nav-icon">🎓</span>
+          <span class="nav-text">Atelier Guidé: Étudiants</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Contenu principal -->
+  <main class="app-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Pied de page -->
+  <footer class="app-footer">
+    <p>TP4 Angular - Directives Structurelles et Attributs © 2025</p>
+  </footer>
+</div>

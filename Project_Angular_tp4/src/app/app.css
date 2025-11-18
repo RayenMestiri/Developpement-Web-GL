@@ -1,0 +1,145 @@
+/* Styles globaux pour l'application */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+/* En-tête */
+.app-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.app-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.app-subtitle {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* Navigation */
+.app-nav {
+  background-color: #2c3e50;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+}
+
+.nav-list li {
+  flex: 1 1 auto;
+  min-width: 200px;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 20px;
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: all 0.3s;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-link:hover {
+  background-color: #34495e;
+  border-bottom-color: #3498db;
+}
+
+.nav-link.active {
+  background-color: #3498db;
+  border-bottom-color: #2980b9;
+}
+
+.nav-icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.nav-text {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Contenu principal */
+.app-content {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Pied de page */
+.app-footer {
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+}
+
+.app-footer p {
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-title {
+    font-size: 28px;
+  }
+
+  .app-subtitle {
+    font-size: 16px;
+  }
+
+  .nav-list {
+    flex-direction: column;
+  }
+
+  .nav-list li {
+    width: 100%;
+  }
+
+  .nav-link {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+
+  .nav-icon {
+    margin-bottom: 0;
+  }
+}

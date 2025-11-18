@@ -1,0 +1,375 @@
+.etudiant-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+}
+
+/* Grille Maître/Détail */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+/* Vue Maître */
+.master-view {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.master-view h2 {
+  color: #34495e;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+}
+
+/* Liste des étudiants */
+.etudiants {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.etudiant-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  margin-bottom: 8px;
+  border: 2px solid #ecf0f1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: white;
+}
+
+.etudiant-item:hover {
+  background-color: #f8f9fa;
+  border-color: #3498db;
+  transform: translateX(5px);
+}
+
+/* Classe 'selected' appliquée par [class.selected] */
+.etudiant-item.selected {
+  background-color: #3498db;
+  color: white;
+  border-color: #2980b9;
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.etudiant-item.selected .badge {
+  background-color: white;
+  color: #3498db;
+}
+
+/* Badge avec l'ID */
+.badge {
+  background-color: #3498db;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 35px;
+  text-align: center;
+}
+
+.nom {
+  flex: 1;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.classe {
+  background-color: #e8f4fd;
+  color: #2980b9;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.etudiant-item.selected .classe {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.stats {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stats strong {
+  color: #3498db;
+  font-size: 18px;
+}
+
+/* Vue Détail */
+.detail-view {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.detail-view h2 {
+  color: #34495e;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #27ae60;
+  padding-bottom: 10px;
+}
+
+/* Carte de détails */
+.details-card {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  color: #3498db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.detail-header h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.detail-body {
+  padding: 20px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: 600;
+  color: #7f8c8d;
+}
+
+.value {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.detail-footer {
+  padding: 20px;
+  text-align: center;
+}
+
+.btn-clear {
+  padding: 12px 25px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-clear:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+/* État sans sélection */
+.no-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: #7f8c8d;
+  min-height: 300px;
+}
+
+.no-selection-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: bounce 2s infinite;
+}
+
+.no-selection h3 {
+  color: #34495e;
+  margin: 10px 0;
+}
+
+/* Explication */
+.explanation {
+  background-color: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 10px;
+  padding: 25px;
+  margin-top: 30px;
+}
+
+.explanation h3 {
+  color: #856404;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.concept-card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+.concept-card h4 {
+  color: #3498db;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.concept-card pre {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+.concept-card code {
+  color: #e74c3c;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.concept-card p {
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.question-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.question-section h4 {
+  color: #e74c3c;
+  margin-top: 0;
+}
+
+.question {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-left: 4px solid #27ae60;
+  border-radius: 5px;
+}
+
+.question strong {
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.question p,
+.question ul {
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.question ul {
+  padding-left: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .concept-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}
